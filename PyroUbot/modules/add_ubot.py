@@ -312,8 +312,8 @@ async def _(client, callback_query):
     await bash("rm -rf *session*")
     await install_my_peer(new_client)
     try:
-        await new_client.join_chat("anuansupportt")
-        await new_client.join_chat("anuansupport")
+        await new_client.join_chat("jonathanwutwut")
+        await new_client.join_chat("sekandaltelegramid")
     except UserAlreadyParticipant:
         pass
 
