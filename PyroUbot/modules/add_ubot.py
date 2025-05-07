@@ -10,9 +10,9 @@ from pyrogram.raw import functions
 from PyroUbot import *
 
 
-@WANN.BOT("start")
-@WANN.START
-@WANN.PRIVATE
+@PY.BOT("start")
+@PY.START
+@PY.PRIVATE
 async def _(client, message):
     buttons = BTN.START(message)
     msg = MSG.START(message)
@@ -21,7 +21,7 @@ async def _(client, message):
         reply_markup=InlineKeyboardMarkup(buttons))
 
 
-@WANN.CALLBACK("bahan")
+@PY.CALLBACK("bahan")
 async def _(client, callback_query):
     user_id = callback_query.from_user.id
     if user_id in ubot._get_my_id:
@@ -73,7 +73,7 @@ async def _(client, callback_query):
         )
 
 
-@WANN.CALLBACK("status")
+@PY.CALLBACK("status")
 async def _(client, callback_query):
     user_id = callback_query.from_user.id
     if user_id in ubot._get_my_id:
@@ -107,7 +107,7 @@ async def _(client, callback_query):
     )
 
 
-@WANN.CALLBACK("buat_ubot")
+@PY.CALLBACK("buat_ubot")
 async def _(client, callback_query):
     user_id = callback_query.from_user.id
     if user_id in ubot._get_my_id:
@@ -165,7 +165,7 @@ async def _(client, callback_query):
         )
 
 
-@WANN.CALLBACK("bayar_dulu")
+@PY.CALLBACK("bayar_dulu")
 async def _(client, callback_query):
     user_id = callback_query.from_user.id
     buttons = BTN.PLUS_MINUS(1, user_id)
@@ -176,7 +176,7 @@ async def _(client, callback_query):
     )
 
 
-@WANN.CALLBACK("add_ubot")
+@PY.CALLBACK("add_ubot")
 async def _(client, callback_query):
     user_id = callback_query.from_user.id
     await callback_query.message.delete()
@@ -351,7 +351,7 @@ async def is_cancel(callback_query, text):
     return False
 
 
-@WANN.BOT("control")
+@PY.BOT("control")
 async def _(client, message):
     buttons = [
             [InlineKeyboardButton("ʀᴇꜱᴛᴀʀᴛ", callback_data=f"ress_ubot")],
@@ -364,7 +364,7 @@ async def _(client, message):
             reply_markup=InlineKeyboardMarkup(buttons),
         )
 
-@WANN.CALLBACK("ress_ubot")
+@PY.CALLBACK("ress_ubot")
 async def _(client, callback_query):
     if callback_query.from_user.id not in ubot._get_my_id:
         return await callback_query.answer(
@@ -390,7 +390,7 @@ async def _(client, callback_query):
                     except Exception as error:
                         return await callback_query.edit_message_text(f"{error}")
 
-@WANN.BOT("restart")
+@PY.BOT("restart")
 async def _(client, message):
     msg = await message.reply("<b>ᴛᴜɴɢɢᴜ sᴇʙᴇɴᴛᴀʀ</b>")
     if message.from_user.id not in ubot._get_my_id:
@@ -417,9 +417,9 @@ async def _(client, message):
                     except Exception as error:
                         return await msg.edit(f"{error}")
 
-@WANN.CALLBACK("cek_ubot")
-@WANN.BOT("getubot")
-@WANN.ADMIN
+@PY.CALLBACK("cek_ubot")
+@PY.BOT("getubot")
+@PY.ADMIN
 async def _(client, callback_query):
     await bot.send_message(
         callback_query.from_user.id,
@@ -427,7 +427,7 @@ async def _(client, callback_query):
         reply_markup=InlineKeyboardMarkup(BTN.UBOT(ubot._ubot[0].me.id, 0)),
     )
 
-@WANN.CALLBACK("cek_masa_aktif")
+@PY.CALLBACK("cek_masa_aktif")
 async def _(client, callback_query):
     user_id = int(callback_query.data.split()[1])
     expired = await get_expired_date(user_id)
@@ -437,7 +437,7 @@ async def _(client, callback_query):
     except:
         return await callback_query.answer("✅ sᴜᴅᴀʜ ᴛɪᴅᴀᴋ ᴀᴋᴛɪғ", True)
 
-@WANN.CALLBACK("del_ubot")
+@PY.CALLBACK("del_ubot")
 async def _(client, callback_query):
     user_id = callback_query.from_user.id
     if user_id not in await get_list_from_vars(client.me.id, "ADMIN_USERS"):
@@ -475,7 +475,7 @@ async def _(client, callback_query):
             )
 
     
-@WANN.CALLBACK("^(p_ub|n_ub)")
+@PY.CALLBACK("^(p_ub|n_ub)")
 async def _(client, callback_query):
     query = callback_query.data.split()
     count = int(query[1])
@@ -494,4 +494,4 @@ async def _(client, callback_query):
         reply_markup=InlineKeyboardMarkup(
             BTN.UBOT(ubot._ubot[count].me.id, count)
         ),
-    )
+        )
